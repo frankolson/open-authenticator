@@ -1,0 +1,20 @@
+# Junk
+*.tmp
+*.swp
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Node.js things
+node_modules/
+package-lock.json
+
+# output directories
+build/
+dist/
+
+# Provisioning profile
+*.o

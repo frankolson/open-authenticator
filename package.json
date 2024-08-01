@@ -1,0 +1,28 @@
+{
+  "name": "open-authenticator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "ssc build -r -o --test=./test/index.js --headless",
+    "init-project": "ssc init --config",
+    "start": "ssc build -r -o",
+    "dev": "ssc build -r -o --watch",
+    "build": "ssc build -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "esbuild": "^0.23.0"
+  },
+  "dependencies": {
+    "@types/node": "^22.0.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4"
+  },
+  "type": "module"
+}
