@@ -27,12 +27,14 @@ img {
 :root {
   --background-color: rgba(0, 0, 0, 0);
   --text-color-normal: #fffff2;
+  --text-color-muted: #b0b0b0;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --background-color: rgba(0, 0, 0, 0);
     --text-color-normal: #0e1111;
+    --text-color-muted: #b0b0b0;
   }
 }
 
@@ -43,11 +45,92 @@ body {
   color: var(--text-color-normal);
 }
 
-h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font: -apple-system-title0;
-  font-size: 2.5em;
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-color-normal);
+  cursor: pointer;
+}
+
+.root {
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  // full height
+  height: 100%;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  gap: 1rem;
+}
+
+.account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-issuer {
+  font-size: 1.5rem;
+}
+
+.account-label {
+  font-size: 1rem;
+  color: var(--text-color-muted);
+}
+
+.account-totp {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.account-form input {
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.copied-alert {
+  // alert will hover over all elements towards the bottom of the page
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-color-normal);
+  text-align: center;
 }

@@ -7,7 +7,7 @@ if (process.env.DEBUG) {
 }
 
 // components
-import App from './App';
+import App from './components/App';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
