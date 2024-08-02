@@ -3,6 +3,7 @@ import application from 'socket:application';
 import { TOTP } from "totp-generator";
 import { AccountsStateProvider, useAccountsState } from 'src/hooks/useAccounts';
 import { ClipboardProvider, useClipboard } from 'src/hooks/useClipboard';
+import AddAccount from './AddAccount';
 
 const SECOND_INTERVAL = 30;
 
@@ -96,64 +97,32 @@ function ListAccounts() {
   );
 }
 
-function AddAccount({ setShowAddAccount }: { setShowAddAccount: (show: boolean) => void }) {
-  const [issuer, setIssuer] = React.useState('');
-  const [label, setLabel] = React.useState('');
-  const [secret, setSecret] = React.useState('');
-  const { createAccount } = useAccountsState();
-
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    createAccount({ issuer, label, secret });
-    setIssuer('');
-    setLabel('');
-    setSecret('');
-    setShowAddAccount(false);
-  }
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="account-form"
-    >
-      <input
-        type="text"
-        placeholder="Issuer"
-        value={issuer}
-        onChange={(event) => setIssuer(event.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Label"
-        value={label}
-        onChange={(event) => setLabel(event.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Secret"
-        value={secret}
-        onChange={(event) => setSecret(event.target.value)}
-      />
-      <button type="submit">Save</button>
-    </form>
-  );
-}
-
 export default function App() {
   const [showAddAccount, setShowAddAccount] = React.useState(false);
 
   React.useEffect(() => {
     async function initalizeMenu() {
       const menu = `
+        Open Authenticator:
+          About Open Authenticator: _
+          ---
+          Quit: q + CommandOrControl
+        ;
+
         Edit:
           Undo: z + CommandOrControl
-          Redo: Z + CommandOrControl + Shift
+          Redo: z + CommandOrControl + Shift
           ---
           Cut: x + CommandOrControl
           Copy: c + CommandOrControl
           Paste: v + CommandOrControl
           ---
           Select All: a + CommandOrControl
+        ;
+
+        Developer:
+          Reload: r + CommandOrControl
+          Toggle Developer Tools: i + CommandOrControl + OptionOrAlt
         ;
       `
       await application.setSystemMenu({ index: 0, value: menu });
@@ -167,11 +136,13 @@ export default function App() {
       <ClipboardProvider>
         <div className="app">
           <button onClick={() => setShowAddAccount(!showAddAccount)}>
-            {showAddAccount ? 'Hide' : 'Add Account'}
+            {showAddAccount ? 'Cancel' : 'Add Account'}
           </button>
           
-          {showAddAccount && <AddAccount setShowAddAccount={setShowAddAccount} />}
-          <ListAccounts />
+          {showAddAccount
+            ? <AddAccount setShowAddAccount={setShowAddAccount} />
+            : <ListAccounts />
+          }
         </div>
       </ClipboardProvider>
     </AccountsStateProvider>
