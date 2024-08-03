@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
-import crypto from 'socket:crypto'
-import { AccountType } from '../types'
+import { getAccounts, addAccount, removeAccount } from 'src/lib/storage'
+import { AccountType } from 'src/types'
 
 interface AccountsState {
   accounts: AccountType[]
@@ -15,17 +15,16 @@ interface AccountsProviderProps {
 const AccountsStateContext = createContext<AccountsState | undefined>(undefined)
 
 export function AccountsStateProvider({ children }: AccountsProviderProps) {
-  const [accounts, setAccounts] = useState<AccountType[]>([])
+  const [accounts, setAccounts] = useState<AccountType[]>(getAccounts())
 
   function createAccount(values: Omit<AccountType, 'id'>) {
-    const id = crypto.webcrypto.randomUUID()
-    setAccounts([...accounts, { id, ...values }])
+    const newAccount = addAccount(values)
+    setAccounts(getAccounts())
   }
 
   function deleteAccount(id: string) {
-    setAccounts((previousAccounts) =>(
-      previousAccounts.filter((account) => account.id !== id)
-    ))
+    removeAccount(id)
+    setAccounts(getAccounts())
   }
 
   return (

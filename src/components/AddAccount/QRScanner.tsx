@@ -50,15 +50,10 @@ export default function QrReader({ onSubmit }: Props) {
     return { secret, issuer, label };
   }
 
-  function handleScanFail(err: string | Error) {
-    console.log(err);
-  }
-
   useEffect(() => {
     if (videoEl?.current && !scanner.current) {
       // 👉 Instantiate the QR Scanner
       scanner.current = new QrScanner(videoEl?.current, handleScanSuccess, {
-        onDecodeError: handleScanFail,
         preferredCamera: "environment", // front = user, back = environment
         highlightScanRegion: true,
         highlightCodeOutline: true,
