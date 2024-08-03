@@ -135,14 +135,18 @@ export default function App() {
     <AccountsStateProvider>
       <ClipboardProvider>
         <div className="app">
-          <button onClick={() => setShowAddAccount(!showAddAccount)}>
-            {showAddAccount ? 'Cancel' : 'Add Account'}
-          </button>
           
-          {showAddAccount
-            ? <AddAccount setShowAddAccount={setShowAddAccount} />
-            : <ListAccounts />
-          }
+          
+          {showAddAccount ? (
+            <AddAccount setShowAddAccount={setShowAddAccount} />
+          ) : (
+            <>
+              <button onClick={() => setShowAddAccount(!showAddAccount)}>
+                &#43; Add Account
+              </button>
+              <ListAccounts />
+            </>
+          )}
         </div>
       </ClipboardProvider>
     </AccountsStateProvider>

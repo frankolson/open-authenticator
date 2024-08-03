@@ -114,6 +114,13 @@ button {
   gap: 1rem;
 }
 
+.account-new-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .account-new-form {
   display: flex;
   flex-direction: column;
@@ -126,18 +133,19 @@ button {
   border-radius: 0.5rem;
 }
 
-// alert will hover over all elements towards the bottom of the page
 .copied-alert { 
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   margin: 1rem;
+  margin-bottom: 2.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.1);
   color: var(--text-color-normal);
   text-align: center;
+  z-index: 100;
 }
 
 .account-new-qr-reader {
@@ -168,7 +176,7 @@ button {
 
 /* Media Queries for mobile screens */
 @media (max-width: 426px) {
-  .qr-reader {
+  .account-new-qr-reader {
     width: 100%;
   }
 }

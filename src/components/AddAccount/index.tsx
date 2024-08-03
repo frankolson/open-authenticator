@@ -56,7 +56,7 @@ function Form({ onSubmit }: FormProps) {
 }
 
 export default function AddAccount({ setShowAddAccount }: Props) {
-  const [showScanner, setShowScanner] = useState(false);
+  const [showScanner, setShowScanner] = useState(true);
   const { createAccount } = useAccountsState();
 
   function handleSubmit({ issuer, label, secret }: { issuer: string, label: string, secret: string }) {
@@ -66,9 +66,15 @@ export default function AddAccount({ setShowAddAccount }: Props) {
 
   return (
     <div className="account-new">
-      <button onClick={() => setShowScanner(!showScanner)}>
-        {showScanner ? 'Hide Scanner' : 'Show Scanner'}
-      </button>
+      <div className="account-new-header">
+        <button onClick={() => setShowScanner(!showScanner)}>
+          {showScanner ? 'Manual Input' : 'QR Scanner'}
+        </button>
+
+        <button onClick={() => setShowAddAccount(false)}>
+          X
+        </button>
+      </div>
 
       {showScanner
         ? <QRScanner onSubmit={handleSubmit} />
