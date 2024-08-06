@@ -1,16 +1,12 @@
 import React, { useState, FormEvent } from 'react';
 import { useAccountsState } from 'src/hooks/useAccounts';
-import QRScanner from './QRScanner';
+import QRScanner from '../components/QRScanner';
 
 interface Props {
   setShowAddAccount: (show: boolean) => void;
 }
 
 interface FormProps {
-  onSubmit: (data: { issuer: string, label: string, secret: string }) => void;
-}
-
-interface QRScannerProps {
   onSubmit: (data: { issuer: string, label: string, secret: string }) => void;
 }
 
