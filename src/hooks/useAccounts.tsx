@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState } from 'react'
-import { getAccounts, addAccount, removeAccount } from 'src/lib/storage'
+import { getAccounts, getAccount, addAccount, setAccount, removeAccount } from 'src/lib/storage'
 import { AccountType } from 'src/types'
 
 interface AccountsState {
   accounts: AccountType[]
-  createAccount: (values: Omit<AccountType, 'id'>) => void
+  getAccount: (id: string) => AccountType
+  createAccount: (values: Omit<AccountType, 'id'>) => AccountType
+  updateAccount: (account: AccountType) => AccountType
   deleteAccount: (id: string) => void
 }
 
@@ -20,6 +22,15 @@ export function AccountsStateProvider({ children }: AccountsProviderProps) {
   function createAccount(values: Omit<AccountType, 'id'>) {
     const newAccount = addAccount(values)
     setAccounts(getAccounts())
+    
+    return newAccount
+  }
+
+  function updateAccount(account: AccountType) {
+    const updatedAccount = setAccount(account)
+    setAccounts(getAccounts())
+
+    return updatedAccount
   }
 
   function deleteAccount(id: string) {
@@ -31,7 +42,9 @@ export function AccountsStateProvider({ children }: AccountsProviderProps) {
     <AccountsStateContext.Provider
       value={{
         accounts,
+        getAccount,
         createAccount,
+        updateAccount,
         deleteAccount
       }}
     >
