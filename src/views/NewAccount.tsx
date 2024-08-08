@@ -1,13 +1,14 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useCallback } from 'react';
 import { useAccountsState } from 'src/hooks/useAccounts';
 import QRScanner from '../components/QRScanner';
+import { OTPDataType } from 'src/types';
 
 interface Props {
   setShowAddAccount: (show: boolean) => void;
 }
 
 interface FormProps {
-  onSubmit: (data: { issuer: string, label: string, secret: string }) => void;
+  onSubmit: (data: OTPDataType) => void;
 }
 
 function Form({ onSubmit }: FormProps) {
@@ -17,10 +18,7 @@ function Form({ onSubmit }: FormProps) {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    onSubmit({ issuer, label, secret });
-    setIssuer('');
-    setLabel('');
-    setSecret('');
+    onSubmit({ scheme: 'totp', issuer, label, secret });
   }
 
   return (
@@ -52,12 +50,31 @@ function Form({ onSubmit }: FormProps) {
 }
 
 export default function AddAccount({ setShowAddAccount }: Props) {
-  const [showScanner, setShowScanner] = useState(true);
   const { createAccount } = useAccountsState();
+  const debounceTime = 1000;
+  const [showScanner, setShowScanner] = useState(true);
+  const isSubmittingRef = React.useRef(false);
+  const lastSubmissionTimeRef = React.useRef(0);
 
-  function handleSubmit({ issuer, label, secret }: { issuer: string, label: string, secret: string }) {
-    createAccount({ issuer, label, secret });
+  const handleSubmit = useCallback((otpData: OTPDataType) => {
+    const now = Date.now();
+    if (shouldDebounceSubmission(now)) return;
+
+    isSubmittingRef.current = true;
+    lastSubmissionTimeRef.current = now;
+
+    createAccount(otpData);
     setShowAddAccount(false);
+
+    setTimeout(() => {
+      isSubmittingRef.current = false;
+    }, debounceTime);
+  }, [createAccount, setShowAddAccount]);
+
+  function shouldDebounceSubmission(now: number) {
+    const timeSinceLastSubmission = now - lastSubmissionTimeRef.current;
+
+    return isSubmittingRef.current || (timeSinceLastSubmission < debounceTime);
   }
 
   return (
@@ -73,7 +90,7 @@ export default function AddAccount({ setShowAddAccount }: Props) {
       </div>
 
       {showScanner
-        ? <QRScanner onSubmit={handleSubmit} />
+        ? <QRScanner onDetected={handleSubmit} />
         : <Form onSubmit={handleSubmit} />
       }
     </div>

@@ -18,3 +18,4 @@ dist/
 
 # Provisioning profile
 *.o
+*.mobileprovision
