@@ -1,19 +1,30 @@
 import React from 'react';
-import AddAccount from '../views/NewAccount';
+import { RouterProvider as Router } from 'src/hooks/useRouter';
+import NewAccount from 'src/views/NewAccount';
 import Home from 'src/views/Home';
+import EditAccount from 'src/views/EditAccount';
 import Providers from './Providers';
 
 export default function App() {
-  const [showAddAccount, setShowAddAccount] = React.useState(false);
+  const routes = [
+    {
+      path: '/',
+      element: <Home />,
+    },
+    {
+      path: '/accounts/new',
+      element: <NewAccount />,
+    },
+    {
+      path: '/accounts/:id',
+      element: <EditAccount />
+    }
+  ]
 
   return (
     <Providers>
       <div className="app">
-        {showAddAccount ? (
-          <AddAccount setShowAddAccount={setShowAddAccount} />
-        ) : (
-          <Home openNewAccountView={() => setShowAddAccount(true)} />
-        )}
+        <Router routes={routes} />
       </div>
     </Providers>
   );

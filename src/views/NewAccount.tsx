@@ -3,13 +3,11 @@ import { useAccountsState } from 'src/hooks/useAccounts';
 import QRScanner from '../components/QRScanner';
 import AccountForm, { FormData } from '../components/AccountForm';
 import { OTPDataType } from 'src/types';
+import { useRouter } from 'src/hooks/useRouter';
 
-interface Props {
-  setShowAddAccount: (show: boolean) => void;
-}
-
-export default function AddAccount({ setShowAddAccount }: Props) {
-  const { createAccount, updateAccount } = useAccountsState();
+export default function AddAccount() {
+  const { createAccount } = useAccountsState();
+  const { goBack } = useRouter();
   const debounceTime = 1000;
   const [showScanner, setShowScanner] = useState(true);
   const isSubmittingRef = React.useRef(false);
@@ -23,12 +21,12 @@ export default function AddAccount({ setShowAddAccount }: Props) {
     lastSubmissionTimeRef.current = now;
 
     createAccount(otpData);
-    setShowAddAccount(false);
+    goBack();
 
     setTimeout(() => {
       isSubmittingRef.current = false;
     }, debounceTime);
-  }, [createAccount, setShowAddAccount]);
+  }, [createAccount, goBack]);
 
   function shouldDebounceSubmission(now: number) {
     const timeSinceLastSubmission = now - lastSubmissionTimeRef.current;
@@ -43,12 +41,14 @@ export default function AddAccount({ setShowAddAccount }: Props) {
   return (
     <div className="view">
       <div className="view-header">
+        <div>
+          <button onClick={() => goBack()}>
+            &#x2190; Back
+          </button>
+        </div>
+
         <button onClick={() => setShowScanner(!showScanner)}>
           {showScanner ? 'Manual Input' : 'QR Scanner'}
-        </button>
-
-        <button onClick={() => setShowAddAccount(false)}>
-          X
         </button>
       </div>
 

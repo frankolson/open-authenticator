@@ -1,17 +1,22 @@
 import React from 'react';
 import AccountList from 'src/components/AccountList';
+import { useRouter } from 'src/hooks/useRouter';
 
-interface Props {
-  openNewAccountView: () => void;
-}
-
-export default function Home({ openNewAccountView }: Props) {
+export default function Home() {
+  const { navigate } = useRouter();
+  
   return (
-    <>
-      <button onClick={() => openNewAccountView()}>
-        &#43; Add Account
-      </button>
-      <AccountList />
-    </>
+    <div className='view'>
+      <div className='view-header'>
+        <div></div>
+        
+        <button onClick={() => navigate("/accounts/new")}>
+          &#43; Add Account
+        </button>
+      </div>
+      <div className='view-content'>
+        <AccountList />
+      </div>
+    </div>
   );
 }
