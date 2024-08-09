@@ -34,19 +34,27 @@ export default function Account({ account }: Props) {
     return { otp, remaining };
   }
 
+  const accountName = issuer ? `${issuer}: ${label}` : label;
+
   return (
     <div className="account">
-      <div className="account-info">
-        <div className="account-issuer">{issuer}</div>
-        <div className="account-label">{label}</div>
+      <div className="account-header">
+        {accountName}
       </div>
-      <div className="account-totp">
-        <Code code={code} />
-        <ExpirationTimer percent={percent} />
 
-        <button onClick={() => navigate(`/accounts/${account.id}`)}>
+      <div className="account-content">
+        <div className="totp">
+          <ExpirationTimer percent={percent} />
+          <Code code={code} />
+        </div>
+
+        <button
+          className="button-icon"
+          style={{ alignSelf: 'end', paddingBottom: '0', paddingRight: '0' }}
+          onClick={() => navigate(`/accounts/${account.id}`)}
+        >
           <Gear />
-        </button>
+        </button> 
       </div>
     </div>
   );

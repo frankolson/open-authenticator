@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash } from '@phosphor-icons/react';
+import { CaretLeft, Trash } from '@phosphor-icons/react';
 import AccountForm, { FormData } from 'src/components/AccountForm';
 import { useAccountsState } from 'src/hooks/useAccounts';
 import { useLocation } from 'src/hooks/useLocation';
@@ -26,7 +26,7 @@ export default function EditAccount() {
       <div className='view-header'>
         <div>
           <button onClick={() => goBack()}>
-            &#x2190; Back
+            <CaretLeft /> Back
           </button>
         </div>
         

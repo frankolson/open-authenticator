@@ -4,6 +4,7 @@ import QRScanner from '../components/QRScanner';
 import AccountForm, { FormData } from '../components/AccountForm';
 import { OTPDataType } from 'src/types';
 import { useRouter } from 'src/hooks/useRouter';
+import { CaretLeft } from '@phosphor-icons/react';
 
 export default function AddAccount() {
   const { createAccount } = useAccountsState();
@@ -43,7 +44,7 @@ export default function AddAccount() {
       <div className="view-header">
         <div>
           <button onClick={() => goBack()}>
-            &#x2190; Back
+            <CaretLeft /> Back
           </button>
         </div>
 

@@ -1,9 +1,31 @@
+:root {
+  --body-color: rgba(0, 0, 0, 0);
+  --background-color: rgba(255, 255, 255, 0.1);
+  --button-color: rgba(255, 255, 255, 0.1);
+  --button-color-disabled: rgba(255, 255, 255, 0.05);
+  --max-width: var(--max-width);
+  --text-size: 1rem;
+  --text-color-normal: #fffff2;
+  --text-color-muted: #b0b0b0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --body-color: rgba(0, 0, 0, 0);
+    --background-color: rgba(0, 0, 0, 0.1);
+    --button-color: rgba(0, 0, 0, 0.1);
+    --button-color-disabled: rgba(0, 0, 0, 0.05);
+    --text-color-normal: #0e1111;
+    --text-color-muted: #b0b0b0;
+  }
+}
+
 /* Minimal Reset */
 html {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  /* line-height: 1.5; */
 }
 
 *, *:before, *:after {
@@ -25,27 +47,7 @@ img {
   height: auto;
 }
 
-/* Placeholder Styles */
-:root {
-  --body-color: rgba(0, 0, 0, 0);
-  --background-color: rgba(255, 255, 255, 0.1);
-  --button-color: rgba(255, 255, 255, 0.1);
-  --button-color-disabled: rgba(255, 255, 255, 0.05);
-  --text-color-normal: #fffff2;
-  --text-color-muted: #b0b0b0;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --body-color: rgba(0, 0, 0, 0);
-    --background-color: rgba(0, 0, 0, 0.1);
-    --button-color: rgba(0, 0, 0, 0.1);
-    --button-color-disabled: rgba(0, 0, 0, 0.05);
-    --text-color-normal: #0e1111;
-    --text-color-muted: #b0b0b0;
-  }
-}
-
+/* Global styles */
 body {
   height: 100vh;
   background-color: var(--body-color);
@@ -75,13 +77,20 @@ button {
   border: none;
   border-radius: 0.5rem;
   background-color: var(--button-color);
+  font-size: var(--text-size);
   color: var(--text-color-normal);
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 button:disabled {
   background-color: var(--button-color-disabled);
   cursor: not-allowed;
+}
+
+.button-icon {
+  background-color: transparent;
 }
 
 #root {
@@ -105,34 +114,33 @@ button:disabled {
 
 .account {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
   gap: 0.5rem;
   border-radius: 0.5rem;
   background-color: var(--background-color);
   padding: 1rem;
 }
 
-.account-info {
+.account-header {
+  width: 100%;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-content {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
-.account-issuer {
-  font-size: 1.5rem;
-}
-
-.account-label {
-  font-size: 1rem;
-  color: var(--text-color-muted);
-}
-
-.account-totp {
+.totp {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
-  font-size: 2rem;
-  padding: 0.25rem;
+  gap: 0.5rem;
+  flex-grow: 1;
+  font-size: 2.5rem;
   cursor: pointer;
   user-select: none;
 }
@@ -188,7 +196,7 @@ button:disabled {
 }
 
 .qr-scanner {
-  width: 430px;
+  width: var(--max-width);
   margin: 0 auto;
   position: relative;
   flex-grow: 1;
@@ -221,7 +229,7 @@ button:disabled {
 }
 
 /* Media Queries for mobile screens */
-@media (max-width: 430px) {
+@media (max-width: var(--max-width)) {
   .qr-scanner {
     width: 100%;
   }
