@@ -16,14 +16,6 @@ export default function ExpirationTimer({ percent }: Props) {
       ? strokePercent === 0 ? circumference : strokePercent
       : 0;
 
-    if (color !== "lightgrey") {
-      console.log("Circumference: ", circumference);
-      console.log("Stroke percent: ", strokePercent);
-      console.log("Stroke Color: ", strokeColor);
-      console.log("Stroke Dashoffset: ", strokeDashoffset);
-      console.log("---")
-    }
-
     return (
       <circle
         r={radius}
