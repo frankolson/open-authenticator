@@ -25,6 +25,7 @@ export function LocationProvider({ children }: LocationProviderProps) {
     for (const route of routes) {
       const params = matchPath(route.path, path);
       if (params) {
+        console.log('Found route:', route.path, 'with params:', params);
         return { route, params };
       }
     }

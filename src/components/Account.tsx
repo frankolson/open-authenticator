@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { TOTP } from 'totp-generator';
+import { Gear } from '@phosphor-icons/react';
 import { AccountType } from 'src/types';
 import Code from './Code';
 import ExpirationTimer from './ExpirationTimer';
+import { useRouter } from 'src/hooks/useRouter';
 
 interface Props {
   account: AccountType;
@@ -11,6 +13,7 @@ interface Props {
 export default function Account({ account }: Props) {
   const RECHECK_INTERVAL = 1000;
   const SECOND_INTERVAL = 30;
+  const { navigate } = useRouter();
   const { issuer, label, secret } = account;
   const [code, setCode] = React.useState(extractOTP(secret).otp);
   const [percent, setPercent] = React.useState(extractOTP(secret).remaining);
@@ -40,6 +43,10 @@ export default function Account({ account }: Props) {
       <div className="account-totp">
         <Code code={code} />
         <ExpirationTimer percent={percent} />
+
+        <button onClick={() => navigate(`/accounts/${account.id}`)}>
+          <Gear />
+        </button>
       </div>
     </div>
   );

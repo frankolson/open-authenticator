@@ -11,7 +11,7 @@ interface Props {
   onSubmit: (account: FormData) => void;
 }
 
-export default function EditAccount({ accountId, onSubmit }: Props) {
+export default function AccountForm({ accountId, onSubmit }: Props) {
   const { getAccount } = useAccountsState();
   const account = accountId ? getAccount(accountId) : null;
   const [label, setLabel] = useState(account?.label || '');

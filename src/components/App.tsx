@@ -16,7 +16,7 @@ export default function App() {
       element: <NewAccount />,
     },
     {
-      path: '/accounts/:id',
+      path: '/accounts/:accountId',
       element: <EditAccount />
     }
   ]
