@@ -62,11 +62,13 @@ body {
 
 label {
   font-size: 0.75rem;
+  margin-left: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
 input {
   padding: 0.5rem;
+  font-size: var(--text-size);
   margin-bottom: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
@@ -81,6 +83,7 @@ button {
   color: var(--text-color-normal);
   cursor: pointer;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
