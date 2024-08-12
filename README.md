@@ -17,11 +17,18 @@ Open Authenticator is a free and open-source two-factor authentication (2FA) app
 
 ## Features
 
-- **Cross-Platform**: Available on both iOS and Android (TODO).
-- **Secure**: Uses industry-standard algorithms for generating time-based one-time passwords (TOTP).
 - **Open Source**: Fully open source, allowing for community contributions and transparency.
-- **User-Friendly**: Simple and intuitive user interface.
 - **Offline**: Works without an internet connection.
+- **Secure**: Uses industry-standard algorithms for generating time-based one-time passwords (TOTP).
+  - _**Note**: While all of the OTP secrets are stored locally, they are currently stored using the localStorage API. This is not secure and will be replaced with a more secure storage mechanism in the future._
+- **User-Friendly**: Simple and intuitive user interface.
+- **Cross-Platform**: Available on both Android (TODO) and iOS.
+
+## Usage
+
+1. Open the app on your device.
+2. Scan the QR code provided by the service you want to enable 2FA for.
+3. Use the generated code to complete the 2FA setup on the service.
 
 ## Installation
 
@@ -61,7 +68,7 @@ _**Note**: You will not be able to use the camera based features using the emula
 
 ### Running on a physical device
 
-1. Ensure that you have a configured `.sscrc` file in the root of the project with the necessary credentials. An example `.ssrc` setup can be found in the `.ssrc-example` file at the root of this project. Checkout the [SocketSupply documentation]https://socketsupply.co/guides/#mobile-guides) for more information.
+1. Ensure that you have a configured `.sscrc` file in the root of the project with the necessary credentials. An example `.ssrc` setup can be found in the `.ssrc-example` file at the root of this project. Checkout the [SocketSupply documentation](https://socketsupply.co/guides/#mobile-guides) for more information.
 
 2. Ensure the device is plugged into your computer and then issue the install command:
   1. For iOS
@@ -72,12 +79,6 @@ _**Note**: You will not be able to use the camera based features using the emula
       ```sh
       npm run install:android
       ```
-
-## Usage
-
-1. Open the app on your device.
-2. Scan the QR code provided by the service you want to enable 2FA for.
-3. Use the generated code to complete the 2FA setup on the service.
 
 ## Contributing
 
