@@ -6,8 +6,8 @@ An open source 2FA authenticator app for iOS and Android built using SocketSuppl
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
 - [Usage](#usage)
+- [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
 
