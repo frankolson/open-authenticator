@@ -19,3 +19,6 @@ dist/
 # Provisioning profile
 *.o
 *.mobileprovision
+
+# Local configuration file
+.sscrc
