@@ -1,0 +1,5 @@
+[settings.ios] ; override the `[ios]` section in `socket.ini`
+
+codesign_identity = "iPhone Developer: Me (XXXXXXXXXX)"
+simulator_device = "iPhone 15"
+provisioning_profile = "/Users/me/open-authenticator/development.mobileprovision"

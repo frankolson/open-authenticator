@@ -7,6 +7,8 @@
     "init-project": "ssc init --config",
     "start": "ssc build -r -o",
     "dev": "ssc build -r -o --watch",
+    "install:ios": "ssc build --platform=ios -c -p && ssc install-app --platform=ios",
+    "install:android": "ssc build --platform=android -c -p && ssc install-app --platform=android",
     "build": "ssc build -o"
   },
   "keywords": [],
